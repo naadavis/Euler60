@@ -13,6 +13,7 @@ int hexagonal(const int& n) { return (n*(2*n-1)); }
 int heptagonal(const int& n) { return (n*(5*n-3))/2; }
 int octagonal(const int& n) { return (n*(3*n-2)); }
 
+// Using the generators, return list of all 4 digit numbers generated
 list<int> fourDigitGen( int (*f)(const int&)  )
 {
 	int n = 1;
@@ -35,6 +36,7 @@ bool match( const int& a, const int& b )
 	return a%100 == b/100;
 }
 
+// Cycle through generated lists, doing depth first search to find an answer
 bool buildCycle( list<int>& path, list<list<int>>& remaining )
 {
 	/*
@@ -106,6 +108,8 @@ bool buildCycle( list<int>& path, list<list<int>>& remaining )
 	return false;
 }
 
+// Since it's a cycle, doesn't matter with what list we begin
+// so choose a small one
 int main()
 {
 	list<list<int>> ftypes;
@@ -115,13 +119,7 @@ int main()
 	ftypes.push_back( fourDigitGen( &square ) );
 	ftypes.push_back( fourDigitGen( &pentagonal ) );
 	ftypes.push_back( fourDigitGen( &hexagonal ) );
-	/*
- 	figfuncs[1] = heptagonal;
-	figfuncs[2] = triangle;
-	figfuncs[3] = square;
-	figfuncs[4] = pentagonal;
-	figfuncs[5] = hexagonal;
-	*/
+
 	for( auto &n : fourDigitGen( &octagonal ) )
 	{
 		list<int> temp(1,n);
